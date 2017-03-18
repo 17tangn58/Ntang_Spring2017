@@ -11,9 +11,19 @@ public class ValueCell extends RealCell{
 	}
 	public String abbreviatedCellText(){
 		String num = getString();
-		/*if (decimal*10/10==decimal)
-			num= num+".0";*/
-		if(getString().length()>10){
+		int dot=periodLoc();
+		if (dot==-1)
+			num= num+".0";
+		int i=getString().length()-1;
+		if(decimal!=0){
+			while(num.substring(i, i+1).equals("0")&&dot>=0){
+				num=num.substring(0, i);
+				i--;
+			}
+			if(num.substring(num.length()-1).equals("."))
+				num=num+"0";
+		}
+		if(num.length()>10){
 				return num.substring(0, 10);
 		}	
 		else
@@ -24,5 +34,11 @@ public class ValueCell extends RealCell{
 			return decimal*-1.0;
 		return decimal;
 	}
-	
+	public int periodLoc(){
+		for(int i=0;i<getString().length();i++){
+			if(getString().substring(i, i+1).equals("."))
+				return i;
+		}
+		return -1;
+	}
 }

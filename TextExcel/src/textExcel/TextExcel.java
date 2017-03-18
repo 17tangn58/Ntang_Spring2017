@@ -1,6 +1,7 @@
 package textExcel;
 //Nathan Tang 2nd period
 import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 public class TextExcel{
@@ -15,4 +16,5 @@ public class TextExcel{
 			command=userInput.nextLine();
 		}
 	}
+
 }

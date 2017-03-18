@@ -2,6 +2,11 @@ package textExcel;
 //Nathan Tang 2nd period
 // Update this file with your own code.
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.util.Scanner;
+
 public class Spreadsheet implements Grid{
 	Cell[][] sprsheet=new Cell[20][12];
 	public Spreadsheet(){
@@ -14,6 +19,10 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String processCommand(String command){
 		String[] commandParts = command.split(" ", 3);
+		if(commandParts[0].toLowerCase().equals("save"))
+			return writeToFile(commandParts[1]);
+		if(commandParts[0].toLowerCase().equals("open"))
+			return readFile(commandParts[1]);
 		if(commandParts.length==1&&commandParts[0].toLowerCase().equals("clear"))
 			return clear();
 		SpreadsheetLocation loc;
@@ -80,6 +89,33 @@ public class Spreadsheet implements Grid{
 			for(int j=0;j<sprsheet[i].length;j++)
 				sprsheet[i][j]=new EmptyCell();
 		}
+		return getGridText();
+	}
+	private String writeToFile (String filename){
+		PrintStream outputFile;
+		try {
+			outputFile = new PrintStream(new File(filename));
+		}
+		catch (FileNotFoundException e) {
+			return "File not found: " + filename;
+		}
+		outputFile.close();
+		return "completed";
+	}
+	private String readFile(String filename){
+		Scanner inputFile;
+		try {
+			inputFile = new Scanner(new File(filename));
+		}
+		catch (FileNotFoundException e) {
+			return "File not found: " + filename;
+		}
+		while(inputFile.hasNextLine()){
+			String line=inputFile.nextLine();
+			System.out.println(this.processCommand(line));
+
+		}
+		inputFile.close();
 		return getGridText();
 	}
 }
