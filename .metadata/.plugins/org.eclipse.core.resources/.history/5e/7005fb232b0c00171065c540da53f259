@@ -99,9 +99,8 @@ public class Spreadsheet implements Grid{
 		catch (FileNotFoundException e) {
 			return "File not found: " + filename;
 		}
-		outputFile.println(getGridText());
 		outputFile.close();
-		return outputFile.toString();
+		return "completed";
 	}
 	private String readFile(String filename){
 		Scanner inputFile;

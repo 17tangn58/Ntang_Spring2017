@@ -101,7 +101,7 @@ public class Spreadsheet implements Grid{
 		}
 		outputFile.println(getGridText());
 		outputFile.close();
-		return outputFile.toString();
+		return "completed";
 	}
 	private String readFile(String filename){
 		Scanner inputFile;
