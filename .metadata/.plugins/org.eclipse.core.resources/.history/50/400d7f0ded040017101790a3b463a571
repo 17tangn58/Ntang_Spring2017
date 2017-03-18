@@ -1,0 +1,20 @@
+package textExcel;
+//Nathan Tang 2nd period
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+public class TextExcel{
+	public static void main(String[] args) throws FileNotFoundException{
+		Spreadsheet spreadsheet = new Spreadsheet();
+		SpreadsheetLocation loc= new SpreadsheetLocation("A1");
+		TextCell fh=new TextCell("01234567890123456789");
+		System.out.println(fh.abbreviatedCellText());
+		/*Scanner userInput=new Scanner(System.in);
+		System.out.println("Please enter a command");
+		String command=userInput.nextLine();
+		while(!command.equals("quit")){ //Command loop
+			System.out.println(spreadsheet.processCommand(command));
+			System.out.println("Please enter another command");
+			command=userInput.nextLine();
+		}*/
+	}
+}

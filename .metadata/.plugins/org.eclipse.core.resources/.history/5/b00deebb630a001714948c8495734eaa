@@ -1,0 +1,29 @@
+package textExcel;
+
+public class ValueCell extends RealCell{
+	private double decimal;
+	public ValueCell(String value) {
+		super(value);
+		decimal=Integer.parseInt(value.substring(1, value.length()-1));
+	}
+	public String fullCellText(){
+		return ""+decimal;
+	}
+	public String abbreviatedCellText(){
+		if(getString().length()-1>10){
+			if(getString().substring(0, 1).equals("\"")){
+				if(getString().substring(10, 11).equals("\""))
+					return getString().substring(1, 10);
+				return getString().substring(1, 11);
+			}
+			else
+				return getString().substring(0, 10);
+		}	
+		else
+			return String.format("%-10s", getString().substring(1, getString().length()-1));
+	}
+	public double getDoubleValue(){
+		return decimal;
+	}
+	
+}

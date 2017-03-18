@@ -1,0 +1,78 @@
+package textExcel;
+//Nathan Tang 2nd period
+// Update this file with your own code.
+
+public class Spreadsheet implements Grid{
+	Cell[][] sprsheet=new Cell[20][12];
+	public Spreadsheet(){
+		for(int i=0;i<sprsheet.length;i++){
+			for(int j=0;j<sprsheet[i].length;j++)
+				sprsheet[i][j]=new EmptyCell();
+		}
+
+	}
+	@Override
+	public String processCommand(String command){
+		// TODO Make it not have errors
+		String[] commandParts = command.split(" ");
+		if(commandParts.length==1&&commandParts[0].toLowerCase().equals("clear"))
+			return clear();
+		SpreadsheetLocation loc;
+		if(commandParts.length==1&&!commandParts[0].equals("clear")){
+			loc=new SpreadsheetLocation(commandParts[0]);
+			return getCell(loc).fullCellText();
+		}
+		else if(commandParts[1].equals("=")){
+			loc=new SpreadsheetLocation(commandParts[0]);
+			sprsheet[loc.getRow()][loc.getCol()]= new TextCell(commandParts[2].substring(1, commandParts[2].length()-1));
+			return sprsheet[loc.getRow()][loc.getCol()].fullCellText();
+		}
+		else if(commandParts[0].toLowerCase().equals("clear")){
+			loc =new SpreadsheetLocation(commandParts[1]);
+			sprsheet[loc.getRow()][loc.getCol()]=new EmptyCell();
+			return getGridText();
+		}
+		else
+			return command;
+	}
+	@Override
+	public int getRows(){
+		return 20;
+	}
+
+	@Override
+	public int getCols(){
+		return 12;
+	}
+
+	@Override
+	public Cell getCell(Location loc){
+		return sprsheet[loc.getRow()][loc.getCol()];
+	}
+
+	@Override
+	public String getGridText(){
+		String s="   |";
+		for(int i=0;i<12;i++){
+			s+=(char)('A' + i)+"         |";
+		}
+		s+="\n";
+		for(int i=0;i<this.getRows();i++){
+			s+=String.format("%-3d|", i+1);
+			for(int j=0;j<this.getCols();j++){
+				char row=(char) (j+65);
+				int col=j+1;
+				String loc=row+""+col;
+				SpreadsheetLocation cellLoc=new SpreadsheetLocation(loc);
+				s+=getCell(cellLoc).abbreviatedCellText()+"|";
+			}
+			s+="\n";
+		}
+		return s;
+	}
+	public String clear(){
+		Spreadsheet newSheet=new Spreadsheet();
+		return newSheet.getGridText();
+	}
+}
+

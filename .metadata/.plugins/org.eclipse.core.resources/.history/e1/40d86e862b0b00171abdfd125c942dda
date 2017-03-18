@@ -1,0 +1,20 @@
+package textExcel;
+
+public class PercentCell extends ValueCell {
+	private double percent;
+	public PercentCell(String value){
+			super(value);
+			percent=Double.parseDouble(value.substring(1, value.length()-1));
+	}
+	public String fullCellText(){
+		return ""+percent/100;
+	}
+	public String abbreviatedCellText(){
+		percent*=100/100;
+		return String.format("%-10s", percent+"%");
+	}
+	public double getDoubleValue(){
+		return percent/100;
+	}
+	
+}
