@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class Spreadsheet implements Grid{
 	Cell[][] sprSheet=new Cell[20][12];
 	public Spreadsheet(){
-		//Creates spreadsheet by initializing a 20 row 12 column sheet with empty cells
 		for(int i=0;i<sprSheet.length;i++){
 			for(int j=0;j<sprSheet[i].length;j++)
 				sprSheet[i][j]=new EmptyCell();
@@ -19,23 +18,19 @@ public class Spreadsheet implements Grid{
 	}
 	@Override
 	public String processCommand(String command){
-		
 		String[] commandParts = command.split(" ", 3);
 		if(commandParts[0].toLowerCase().equals("save"))
 			return writeToFile(commandParts[1]);
 		if(commandParts[0].toLowerCase().equals("open"))
 			return readFile(commandParts[1]);
 		if(commandParts.length==1&&commandParts[0].toLowerCase().equals("clear"))
-			//calls method that clears spreadsheet
 			return clear();
 		SpreadsheetLocation loc;
 		if(commandParts.length==1&&!commandParts[0].equals("clear")&&!commandParts[0].equals("")){
-			//inspection of cell
 			loc=new SpreadsheetLocation(commandParts[0]);
 			return getCell(loc).fullCellText();
 		}
 		else if(commandParts.length>1&&commandParts[1].equals("=")){
-			//constructing the correct cell type
 			loc=new SpreadsheetLocation(commandParts[0]);
 			if(commandParts[2].substring(0,1).equals("\""))
 				sprSheet[loc.getRow()][loc.getCol()]= new TextCell(commandParts[2]);
@@ -48,34 +43,29 @@ public class Spreadsheet implements Grid{
 			return getGridText();
 		}
 		else if(commandParts[0].toLowerCase().equals("clear")){
-			//clears a single cell
 			loc =new SpreadsheetLocation(commandParts[1]);
 			sprSheet[loc.getRow()][loc.getCol()]=new EmptyCell();
 			return getGridText();
 		}
 		return "";
 	}
-	
+	@Override
 	public int getRows(){
-		//number of columns(1->20) is 20
 		return 20;
 	}
 
-	
+	@Override
 	public int getCols(){
-		//number of columns(A->L) is 12
 		return 12;
 	}
 
-	
+	@Override
 	public Cell getCell(Location loc){
-		//returns the cell at that location
 		return sprSheet[loc.getRow()][loc.getCol()];
 	}
 
-	
+	@Override
 	public String getGridText(){
-		//constructs the spreadsheet
 		String s="   |";
 		for(int i=0;i<12;i++){
 			s+=(char)('A' + i)+"         |";
@@ -95,7 +85,6 @@ public class Spreadsheet implements Grid{
 		return s;
 	}
 	public String clear(){
-		//clears spreadsheet by making everything empty cells
 		for(int i=0;i<sprSheet.length;i++){
 			for(int j=0;j<sprSheet[i].length;j++)
 				sprSheet[i][j]=new EmptyCell();
@@ -111,7 +100,6 @@ public class Spreadsheet implements Grid{
 			return "File not found: " + filename;
 		}
 		String enter="";
-		//for loop that checks all cells to return location, type, values stored in each
 		for(int i=0;i<20;i++){
 			for(char j='A';j<'M';j++){
 				Cell test=sprSheet[i][j-'A'];
@@ -142,7 +130,6 @@ public class Spreadsheet implements Grid{
 			return "File not found: " + filename;
 		}
 		while(inputFile.hasNextLine()){
-			//Reads the input and decides which cell to construct
 			String line=inputFile.nextLine();
 			String[] lineParts = line.split(",");
 			SpreadsheetLocation loc = new SpreadsheetLocation(lineParts[0]);
