@@ -100,23 +100,22 @@ public class Spreadsheet implements Grid{
 			return "File not found: " + filename;
 		}
 		String output="";
-		String newline="\n";
 		for(int i=0;i<20;i++){
 			for(char j=0;j<12;j++){
 				Cell test = sprSheet[i][j];
 				if(sprSheet[i][j] instanceof FormulaCell)
-					output+= (char)(j+'A')+""+(i+1)+",FormulaCell,"+test.fullCellText()+newline;
+					output+= (char)(j+'A')+""+(i+1)+",FormulaCell,"+test.fullCellText()+"\n";
 				else if(sprSheet[i][j] instanceof TextCell)
-					output+= (char)(j+'A')+""+(i+1)+",TextCell,"+test.fullCellText()+newline;
+					output+= (char)(j+'A')+""+(i+1)+",TextCell,"+test.fullCellText()+"\n";
 				else if(sprSheet[i][j] instanceof ValueCell)
-					output+= (char)(j+'A')+""+(i+1)+",ValueCell,"+test.fullCellText()+newline;
+					output+= (char)(j+'A')+""+(i+1)+",ValueCell,"+test.fullCellText()+"\n";
 				else if(sprSheet[i][j] instanceof PercentCell)
-					output+= (char)(j+'A')+""+(i+1)+",PercentCell,"+test.fullCellText()+newline;
+					output+= (char)(j+'A')+""+(i+1)+",PercentCell,"+test.fullCellText()+"\n";
 			}
 		}
 		outputFile.print(output);
 		outputFile.close();
-		return "";
+		return outputFile.toString();
 	}
 	private String readFile(String filename){
 		Scanner inputFile;

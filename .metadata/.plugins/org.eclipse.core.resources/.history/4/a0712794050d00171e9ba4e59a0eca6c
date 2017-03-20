@@ -112,6 +112,7 @@ public class Spreadsheet implements Grid{
 					output+= (char)(j+'A')+""+(i+1)+",ValueCell,"+test.fullCellText()+newline;
 				else if(sprSheet[i][j] instanceof PercentCell)
 					output+= (char)(j+'A')+""+(i+1)+",PercentCell,"+test.fullCellText()+newline;
+				output+=newline;
 			}
 		}
 		outputFile.print(output);

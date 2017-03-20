@@ -32,7 +32,7 @@ public class Spreadsheet implements Grid{
 		}
 		else if(commandParts.length>1&&commandParts[1].equals("=")){
 			loc=new SpreadsheetLocation(commandParts[0]);
-			if(commandParts[2].substring(0,1).equals("\""))
+			if(commandParts[2].substring(0,2).equals("\""))
 				sprSheet[loc.getRow()][loc.getCol()]= new TextCell(commandParts[2]);
 			else if(commandParts[2].substring(commandParts[2].length()-1).equals("%"))
 				sprSheet[loc.getRow()][loc.getCol()]= new PercentCell(commandParts[2].substring(0, commandParts[2].length()-1));
@@ -100,18 +100,17 @@ public class Spreadsheet implements Grid{
 			return "File not found: " + filename;
 		}
 		String output="";
-		String newline="\n";
 		for(int i=0;i<20;i++){
 			for(char j=0;j<12;j++){
 				Cell test = sprSheet[i][j];
 				if(sprSheet[i][j] instanceof FormulaCell)
-					output+= (char)(j+'A')+""+(i+1)+",FormulaCell,"+test.fullCellText()+newline;
+					output+= (char)(j+'A')+""+(i+1)+",FormulaCell,"+test.fullCellText()+"\n";
 				else if(sprSheet[i][j] instanceof TextCell)
-					output+= (char)(j+'A')+""+(i+1)+",TextCell,"+test.fullCellText()+newline;
+					output+= (char)(j+'A')+""+(i+1)+",TextCell,"+test.fullCellText()+"\n";
 				else if(sprSheet[i][j] instanceof ValueCell)
-					output+= (char)(j+'A')+""+(i+1)+",ValueCell,"+test.fullCellText()+newline;
+					output+= (char)(j+'A')+""+(i+1)+",ValueCell,"+test.fullCellText()+"\n";
 				else if(sprSheet[i][j] instanceof PercentCell)
-					output+= (char)(j+'A')+""+(i+1)+",PercentCell,"+test.fullCellText()+newline;
+					output+= (char)(j+'A')+""+(i+1)+",PercentCell,"+test.fullCellText()+"\n";
 			}
 		}
 		outputFile.print(output);
