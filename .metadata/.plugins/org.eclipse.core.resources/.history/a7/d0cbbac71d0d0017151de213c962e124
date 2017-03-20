@@ -141,7 +141,8 @@ public class Spreadsheet implements Grid{
 				sprSheet[loc.getRow()][loc.getCol()]=new TextCell(lineParts[2]);
 			else if(lineParts[1].equals("PercentCell")){
 				String percent = Double.parseDouble(lineParts[2])*100.0+"";
-				sprSheet[loc.getRow()][loc.getCol()]=new PercentCell(percent);
+				System.out.println(percent);
+				sprSheet[loc.getRow()][loc.getCol()]=new TextCell(percent);
 			}
 		}
 		inputFile.close();

@@ -8,7 +8,7 @@ public class TextExcel{
 	public static void main(String[] args) throws FileNotFoundException{
 		String s =Double.parseDouble("0.01021822")*100.0+"";
 		System.out.println(s);
-		PercentCell p = new PercentCell("1.021822");
+		PercentCell p = new PercentCell(s);
 		System.out.println(p.abbreviatedCellText());
 		/*Spreadsheet spreadsheet = new Spreadsheet();
 		Scanner userInput=new Scanner(System.in);

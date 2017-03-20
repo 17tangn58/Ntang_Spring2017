@@ -102,22 +102,43 @@ public class Spreadsheet implements Grid{
 		String enter="";
 		for(int i=0;i<20;i++){
 			for(char j='A';j<'M';j++){
-				Cell test=sprSheet[i][j-'A'];
+				Cell testcase=sprSheet[i][j-'A'];
 				if(sprSheet[i][j-'A'] instanceof FormulaCell){
-					enter+=j+""+(i+1)+",FormulaCell,"+test.fullCellText()+"\n";
+					enter+=j+""+(i+1)+",FormulaCell,"+testcase.fullCellText()+"\n";
 				}
 				if(sprSheet[i][j-'A'] instanceof TextCell){
-					enter+=j+""+(i+1)+",TextCell,"+test.fullCellText()+"\n";
+					enter+=j+""+(i+1)+",TextCell,"+testcase.fullCellText()+"\n";
 				}
 				if(sprSheet[i][j-'A'] instanceof ValueCell){
-					enter+=j+""+(i+1)+",ValueCell,"+test.fullCellText()+"\n";
+					enter+=j+""+(i+1)+",ValueCell,"+testcase.fullCellText()+"\n";
 				}
 				if(sprSheet[i][j-'A'] instanceof PercentCell){
-					enter+=j+""+(i+1)+",PercentCell,"+test.fullCellText()+"\n";
+					enter+=j+""+(i+1)+",PercentCell,"+testcase.fullCellText()+"\n";
 				}
-			}	
+				
+				
+			}
+			
 		}
-		outputFile.print(enter);
+		/*String output="";
+		for(int i=0;i<20;i++){
+			for(char j=0;j<12;j++){
+				Cell test = sprSheet[i][j];
+				if(sprSheet[i][j] instanceof FormulaCell){
+					output+= (char)(j+'A')+""+(i+1)+",FormulaCell,"+test.fullCellText()+"\n";
+				}
+				else if(sprSheet[i][j] instanceof TextCell){
+					output+= (char)(j+'A')+""+(i+1)+",TextCell,"+test.fullCellText()+"\n";
+				}
+				else if(sprSheet[i][j] instanceof ValueCell){
+					output+= (char)(j+'A')+""+(i+1)+",ValueCell,"+test.fullCellText()+"\n";
+				}
+				else if(sprSheet[i][j] instanceof PercentCell){
+					output+= (char)(j+'A')+""+(i+1)+",PercentCell,"+test.fullCellText()+"\n";
+				}
+			}
+		}*/
+		outputFile.print(output);
 		outputFile.close();
 		return "";
 	}
@@ -140,8 +161,8 @@ public class Spreadsheet implements Grid{
 			else if(lineParts[1].equals("FormulaCell"))
 				sprSheet[loc.getRow()][loc.getCol()]=new TextCell(lineParts[2]);
 			else if(lineParts[1].equals("PercentCell")){
-				String percent = Double.parseDouble(lineParts[2])*100.0+"";
-				sprSheet[loc.getRow()][loc.getCol()]=new PercentCell(percent);
+				String percent = Double.parseDouble(lineParts[2])+"";
+				sprSheet[loc.getRow()][loc.getCol()]=new TextCell(percent);
 			}
 		}
 		inputFile.close();
