@@ -11,11 +11,12 @@ public class FormulaCell extends RealCell {
 		return getString();
 	}
 	public String abbreviatedCellText(){
-		//returns answer of the formula as a string, will later be formatted to ten spaces
-		return ""+ans;
+		//returns answer of the formula as a string
+		return String.format("%-10s", ""+ans);
 	}
 	public double getDoubleValue(){
 		//returns the answer to the formula as a double
 		return ans;
 	}
+	
 }

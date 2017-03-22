@@ -1,6 +1,7 @@
 package textExcel;
-//Nathan Tang 2nd period
-// Update this file with your own code.
+/*Nathan Tang 
+ * 2nd period
+ */
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +20,6 @@ public class Spreadsheet implements Grid{
 	}
 	@Override
 	public String processCommand(String command){
-		
 		String[] commandParts = command.split(" ", 3);
 		if(commandParts[0].toLowerCase().equals("save"))
 			return writeToFile(commandParts[1]);
