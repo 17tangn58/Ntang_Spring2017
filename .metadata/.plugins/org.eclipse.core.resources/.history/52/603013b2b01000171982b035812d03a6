@@ -13,7 +13,8 @@ public class PercentCell extends ValueCell {
 	}
 	public String abbreviatedCellText(){
 		//truncates the percentage
-		return String.format("%-10s", getString().substring(0, getString().indexOf("."))+"%");
+		int b=periodLoc();
+		return String.format("%-10s", getString().substring(0, b)+"%");
 	}
 	public double getDoubleValue(){
 		//returns percentage in decimal form
