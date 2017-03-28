@@ -20,12 +20,11 @@ public class FormulaCell extends RealCell {
 		for(int i=0;i<formula.length;i++){
 			if(Character.isLetter(split[i].charAt(0))){
 				SpreadsheetLocation loc = new SpreadsheetLocation(split[i]);
-				
 			}
 		}
-		double answer=formula[0];
-		for(int i=0;i<split.length;i++){
-			answer+=calculate(answer, formula[i+1], split[i]);
+		double answer=Double.parseDouble(formula[1]);
+		for(int i=0;i<formula.length;i++){
+			answer+=calculate(answer, Double.parseDouble(formula[i+1]), formula[i]);
 		}
 		return answer;
 	}	
